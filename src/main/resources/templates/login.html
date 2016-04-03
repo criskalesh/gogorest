@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+   <head>
+   		<link rel="stylesheet" href="../../css/app.css" />
+        <title>Infinispan Example</title>
+    </head>
+    
+    <body class="security-app">
+	<div class="details">
+		<h2>Spring Boot - Infinisapn Cache</h2>		
+	</div>
+
+	<form th:action="@{/login}" method="post">
+		<div class="lc-block">
+			<div>
+				<input type="text" class="style-4" name="username"
+					placeholder="User Name" />
+			</div>
+			<div>
+				<input type="password" class="style-4" name="password"
+					placeholder="Password" />
+			</div>
+			<div>
+				<input type="submit" value="Sign In" class="button red small" />
+			</div>
+			<div th:if="${param.error}">
+				<div class="alert-danger">Invalid username and password.</div>
+			</div>
+			 <div th:if="${param.logout}">
+				<div class="alert-normal">You have been logged out.</div>
+			</div>
+		</div>
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</form>
+</body>
+</html>

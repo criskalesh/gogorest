@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+   		<link rel="stylesheet" href="../../css/app.css" />
+        <title>Infinispan Example</title>
+    </head>
+   <body class="security-app">
+	<div class="details">
+		<h2>Spring Boot - Infinispan Cache</h2>
+		<h4 style="color:black; margin-top:0px; margin-bottom:0px;" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" class="submitLink" value="Sign Out"/>
+        </form>
+		<a th:href="@{/caching/findAllData}" class="button green small">View All Data</a> 
+		<a th:href="@{/caching/loadcache}" class="button red small">Load Cache From DB</a>
+		<a th:href="@{/caching/loadData}" class="button red small">Load Data to DB</a>	
+		<br/><br/>
+		<div style="width: 100%; overflow: hidden;">
+		<form th:action="@{/caching/findSingleData}" method="post">
+			<div style="width: 300px; float: left;"><input type="text" class="style-4" name="code"	placeholder="Ticket Code" /></div>
+			<div style="margin-left: 0px;"><input type="submit" value="Get Ticket" class="button red small" style="margin-top: 10px;"/></div>
+		</form>	
+		</div><br/><br/>
+		<div style="width: 100%; overflow: hidden;">
+		<form th:action="@{/caching/saveTicket}" method="post">
+			<div style="width: 300px; float: left;"><input type="text" class="style-4" name="name" placeholder="Ticket Name" /></div>
+			<div style="margin-left: 0px;"><input type="submit" value="Save Ticket" class="button red small" style="margin-top: 10px;"/></div>
+		</form>	
+		</div>
+	</div>
+	<div class="lc-block">
+		<div th:if="${status}">
+			<p th:text="${status}" />
+		</div>
+		<div th:if="${fullData}">
+		    TKT ID&nbsp;&nbsp;&nbsp;TKT NAME&nbsp;&nbsp;TKT CODE<br/><br/>
+			<div th:each="data : ${fullData}">
+       		<span th:text="${data.ticketid}"/>&nbsp;&nbsp;&nbsp;
+       		<span th:text="${data.ticketName}"/>&nbsp;&nbsp;&nbsp;
+       		<span th:text="${data.ticketCode}"/>       		
+       		</div>
+		</div>
+		<div th:if="${singleData}">
+		    TKT ID&nbsp;&nbsp;&nbsp;TKT NAME&nbsp;&nbsp;TKT CODE<br/><br/>
+       		<span th:text="${singleData.ticketid}"/>&nbsp;&nbsp;&nbsp;
+       		<span th:text="${singleData.ticketName}"/>&nbsp;&nbsp;&nbsp;
+       		<span th:text="${singleData.ticketCode}"/>       		
+		</div>
+	</div>
+  </body>
+</html>

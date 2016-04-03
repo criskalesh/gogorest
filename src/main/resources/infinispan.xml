@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<infinispan xmlns="urn:infinispan:config:7.2">
+	 <jgroups>
+     	<stack-file name="external-file" path="jgroups-tcp.xml"/>
+     </jgroups>
+	<cache-container default-cache="default">
+	 	 <transport stack="external-file" />
+		 <replicated-cache name="ticketcache" mode="SYNC">
+     		<!-- <persistence passivation="false">
+		         <file-store
+		            fetch-state="true" preload="true" shared="false"
+		            purge="false" read-only="false" singleton="false"
+		            path="D:/Krishna/Air">		
+		         </file-store>
+      		</persistence> -->
+     	</replicated-cache>
+	</cache-container>
+
+</infinispan>
